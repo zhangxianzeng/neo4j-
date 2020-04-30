@@ -1,0 +1,10 @@
+:START_ID(actors),role,:END_ID(movies),:TYPE
+keanu,"Neo", keanu,ACTED_IN
+keanu,"Neo",tt0234215,ACTED_IN
+keanu,"Neo",tt0242653,ACTED_IN
+laurence,"Morpheus", keanu,ACTED_IN
+laurence,"Morpheus",tt0234215,ACTED_IN
+laurence,"Morpheus",tt0242653,ACTED_IN
+carrieanne,"Trinity", keanu,ACTED_IN
+carrieanne,"Trinity",tt0234215,ACTED_IN
+carrieanne,"Trinity",tt0242653,ACTED_IN

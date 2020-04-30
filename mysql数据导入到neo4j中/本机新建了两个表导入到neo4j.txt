@@ -1,0 +1,20 @@
+mysql连接neo4j的方法如下首先下载apoc的jar文件和mysql连接器文件将两个文件放入到plugins文件夹中，之后启动neo4j
+
+在浏览器中首先要输入call apoc.load.driver('com.mysql.jdbc.Driver')用来注明mysql驱动程序
+然后输入CALL apoc.load.jdbc('jdbc:mysql://localhost:3306/user?user=root&password=zhangxian11&useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC','select * from people') YIELD row
+CREATE (n:People {name:row.name,age:row.age,sex:row.sex})用来将mysql中的数据导入到neo4j中,一个表一个表的导入
+
+//导入另一个表然后根据外间建立关系
+CALL apoc.load.jdbc('jdbc:mysql://localhost:3306/user?user=root&password=zhangxian11&useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC','select * from sss') YIELD row
+merge (n:SSS {name1:row.name1,age1:row.age1})
+merge(n1:People{name:row.name})
+merge(n)-[:guanxi]->(n1)
+
+
+
+
+//批量导入
+call apoc.periodic.iterate(
+	"call apoc.load.jdbc('jdbc:mysql://localhost:3306/user?user=root&password=zhangxian11&useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC',\"select * from apop\")",
+	"merge (n1:F_CERT{name:row.name})",
+	{batchSize:100,iterateList:true})

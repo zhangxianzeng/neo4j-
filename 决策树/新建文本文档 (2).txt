@@ -1,0 +1,225 @@
+CREATE (tree:Tree { id: 'zhangxianzeng' })
+CREATE (gender_rule1:Rule { name: 'sex', parameter_names: 'gender', parameter_types:'String', expression:'gender.equals(\"female\")' })
+CREATE (gender_rule:Rule { name: 'sex1', parameter_names: 'gender', parameter_types:'String', expression:'gender.equals(\"male\")' })
+CREATE (over21_rule:Rule { name: 'Over 21?', parameter_names: 'age', parameter_types:'int', expression:'age >= 55' })
+CREATE (answer_yes:Answer { id: '阿司匹林肠溶片'})
+CREATE (answer_yes1:Answer { id: '阿司匹林'})
+CREATE (answer_yes2:Answer { id: '999感冒灵'})
+CREATE (tree)-[:HAS{id:'1'}]->(gender_rule)
+CREATE (tree)-[:HAS{id:'2'}]->(gender_rule1)
+CREATE (gender_rule)-[:IS_TRUE{id:'1'}]->(over21_rule)
+CREATE (gender_rule1)-[:IS_TRUE{id:'2'}]->(over21_rule)
+CREATE (over21_rule)-[:IS_TRUE{id:'1'}]->(answer_yes)
+CREATE (over21_rule)-[:IS_TRUE{id:'2'}]->(answer_yes1)
+CREATE (over21_rule)-[:IS_TRUE{id:'1'}]->(answer_yes2)
+CREATE (age:Parameter {name:'age', type:'int', prompt:'How old are you?', expression:'(age > 0) &&  (age < 150)'})
+CREATE (gender:Parameter {name:'gender', type:'String', prompt:'What is your gender?', expression: '\"male\".equals(gender) || \"female\".equals(gender)'} )
+CREATE (over21_rule)-[:REQUIRES]->(age)
+CREATE (gender_rule)-[:REQUIRES]->(gender)
+CREATE (gender_rule1)-[:REQUIRES]->(gender)
+
+CALL com.maxdemarzi.schema.generate
+
+
+
+
+
+
+
+CREATE (tree:Tree { id1: 'zhangxianzeng' })
+CREATE (gender_rule1:Rule { name: 'sex',parameter_names: 'gender', parameter_types:'String', expression:'gender.equals(\"female\")' })
+CREATE (gender_rule:Rule { name: 'sex',parameter_names: 'gender', parameter_types:'String', expression:'gender.equals(\"male\")' })
+CREATE (over21_rule:Rule { name: 'Over 21?', parameter_names: 'age', parameter_types:'int', expression:'age >= 55' })
+CREATE (over21_rule1:Rule { name: 'Over 21a?', parameter_names: 'a', parameter_types:'int', expression:'a >= 30' })
+CREATE (over21_rule2:Rule { name: 'Over 211b?', parameter_names: 'b', parameter_types:'int', expression:'b >= 30' })
+CREATE (over21_rule3:Rule { name: 'Over 21111?', parameter_names: 'c', parameter_types:'int', expression:'c >= 30' })
+CREATE (answer_yes:Answer { id1: '阿司匹林肠溶片'})
+CREATE (answer_yes1:Answer { id1: '阿司匹林'})
+CREATE (answer_yes2:Answer { id1: '999感冒灵'})
+CREATE (tree)-[:HAS]->(gender_rule)
+CREATE (tree)-[:HAS]->(gender_rule1)
+CREATE (gender_rule)-[:IS_TRUE{id:'1'}]->(over21_rule)
+CREATE (gender_rule1)-[:IS_TRUE{id:'2'}]->(over21_rule)
+CREATE (over21_rule)-[:IS_TRUE{id:'1'}]->(over21_rule1)
+CREATE (over21_rule)-[:IS_TRUE{id:'2'}]->(over21_rule2)
+CREATE (over21_rule1)-[:IS_TRUE{id:'1'}]->(over21_rule3)
+CREATE (over21_rule2)-[:IS_TRUE{id:'2'}]->(over21_rule3)
+CREATE (over21_rule3)-[:IS_TRUE{id:'1'}]->(answer_yes)
+CREATE (over21_rule3)-[:IS_TRUE{id:'2'}]->(answer_yes1)
+CREATE (over21_rule3)-[:IS_TRUE{id:'1'}]->(answer_yes2)
+
+CALL com.maxdemarzi.schema.generate
+CALL com.maxdemarzi.traverse.decision_tree('zhangxianzeng', {gender:'male', age:'99',a:'40',c:'40'});
+CALL com.maxdemarzi.traverse.decision_tree('zhangxianzeng', {gender:'female', age:'99',b:'40',c:'40'});
+
+CALL com.maxdemarzi.stepwise.decision_tree('zhangxianzeng', {gender:'male', age:'99',a:'40',c:'40'});
+
+
+
+
+
+CREATE (tree:Tree { id1: 'zhangxianzeng' })
+CREATE (gender_rule1:Rule { name: 'sex', parameter_names: 'gender', parameter_types:'String', expression:'gender.equals(\"female\")' })
+CREATE (gender_rule:Rule { name: 'sex',parameter_names: 'gender', parameter_types:'String', expression:'gender.equals(\"male\")' })
+CREATE (over21_rule:Rule { name: 'Over 21?', parameter_names: 'age', parameter_types:'int', expression:'age >= 55' })
+CREATE (over21_rule1:Rule { name: 'Over 21a?', parameter_names: 'a', parameter_types:'int', expression:'a >= 30' })
+CREATE (answer_yes:Answer { id1: '阿司匹林肠溶片'})
+CREATE (answer_yes1:Answer { id1: '阿司匹林'})
+CREATE (answer_yes2:Answer { id1: '999感冒灵'})
+CREATE (tree)-[:HAS]->(gender_rule)
+CREATE (tree)-[:HAS]->(gender_rule1)
+CREATE (gender_rule)-[:IS_TRUE{id:'1'}]->(over21_rule)
+CREATE (gender_rule)-[:IS_TRUE{id:'1'}]->(over21_rule1)
+CREATE (gender_rule1)-[:IS_TRUE{id:'2'}]->(over21_rule)
+CREATE (over21_rule)-[:IS_TRUE{id:'1'}]->(answer_yes)
+CREATE (over21_rule)-[:IS_TRUE{id:'2'}]->(answer_yes1)
+CREATE (over21_rule1)-[:IS_TRUE{id:'1'}]->(answer_yes2)
+
+CALL com.maxdemarzi.schema.generate
+
+
+
+
+
+
+
+CREATE (tree1:Tree { id1: 'zhangxianzeng1' })
+CREATE (gender_rule1:Rule { name: 'sex', parameter_names: 'gender', parameter_types:'String', expression:'gender.equals(\"female\")' })
+CREATE (gender_rule11:Rule { name: 'sex',parameter_names: 'a', parameter_types:'String', expression:'a.equals(\"male\")' })
+CREATE (over21_rule1:Rule { name: 'sex', parameter_names: 'b', parameter_types:'int', expression:'b >= 55' })
+CREATE (over21_rule11:Rule { name: 'Over 21c?', parameter_names: 'c', parameter_types:'int', expression:'c >= 30' })
+CREATE (over21_rule21:Rule { name: 'Over 211d?', parameter_names: 'd', parameter_types:'int', expression:'d >= 30' })
+CREATE (over21_rule31:Rule { name: 'Over 21111e?', parameter_names: 'e', parameter_types:'int', expression:'e >= 30' })
+CREATE (answer_yes1:Answer { id1: '阿司匹林肠溶片1'})
+CREATE (answer_yes11:Answer { id1: '阿司匹林1'})
+CREATE (answer_yes21:Answer { id1: '999感冒灵1'})
+CREATE (tree1)-[:HAS]->(gender_rule1)
+CREATE (tree1)-[:HAS]->(gender_rule11)
+CREATE (tree1)-[:HAS]->(over21_rule1)
+CREATE (gender_rule1)-[:IS_TRUE{id:'1'}]->(over21_rule11)
+CREATE (gender_rule11)-[:IS_TRUE{id:'2'}]->(over21_rule21)
+CREATE (over21_rule1)-[:IS_TRUE{id:'3'}]->(over21_rule31)
+CREATE (over21_rule11)-[:IS_TRUE{id:'1'}]->(answer_yes1)
+CREATE (over21_rule21)-[:IS_TRUE{id:'2'}]->(answer_yes11)
+CREATE (over21_rule31)-[:IS_TRUE{id:'3'}]->(answer_yes21)
+
+CALL com.maxdemarzi.schema.generate
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+CREATE (tree1:Tree { id1: 'zhangxianzeng1' })
+CREATE (gender_rule1:Rule { name: 'sex', parameter_names: 'gender', parameter_types:'String', expression:'gender.equals(\"female\")' })
+CREATE (gender_rule11:Rule { name: 'sex',parameter_names: 'a', parameter_types:'String', expression:'a.equals(\"male\")' })
+CREATE (over21_rule1:Rule { name: 'sex', parameter_names: 'b', parameter_types:'int', expression:'b >= 55' })
+CREATE (over21_rule11:Rule { name: 'Over 21c?', parameter_names: 'c', parameter_types:'int', expression:'c >= 30' })
+CREATE (over21_rule21:Rule { name: 'Over 211d?', parameter_names: 'd', parameter_types:'int', expression:'d >= 30' })
+CREATE (over21_rule31:Rule { name: 'Over 21111e?', parameter_names: 'e', parameter_types:'int', expression:'e >= 30' })
+
+CREATE (over200:Rule { name: 'Over 200?', parameter_names: 'f', parameter_types:'int', expression:'f >= 30' })
+CREATE (answer_yes1:Answer { id1: '阿司匹林肠溶片1'})
+CREATE (answer_yes11:Answer { id1: '阿司匹林1'})
+CREATE (answer_yes21:Answer { id1: '999感冒灵1'})
+CREATE (tree1)-[:HAS]->(gender_rule1)
+CREATE (tree1)-[:HAS]->(gender_rule11)
+CREATE (tree1)-[:HAS]->(over21_rule1)
+CREATE (gender_rule1)-[:IS_TRUE{id:'1'}]->(over21_rule11)
+CREATE (gender_rule11)-[:IS_TRUE{id:'2'}]->(over21_rule21)
+CREATE (over21_rule1)-[:IS_TRUE{id:'3'}]->(over21_rule31)
+
+
+
+CREATE (over21_rule11)-[:IS_TRUE{id:'1'}]->(over200)
+CREATE (over21_rule21)-[:IS_TRUE{id:'2'}]->(over200)
+CREATE (over21_rule31)-[:IS_TRUE{id:'3'}]->(over200)
+
+CREATE (over200)-[:IS_TRUE{id:'1'}]->(answer_yes1)
+CREATE (over200)-[:IS_TRUE{id:'2'}]->(answer_yes11)
+CREATE (over200)-[:IS_TRUE{id:'3'}]->(answer_yes21)
+
+CALL com.maxdemarzi.traverse.decision_tree('zhangxianzeng1', {gender:'female',c:'40',f:'40'});
+CALL com.maxdemarzi.traverse.decision_tree('zhangxianzeng1', {a:'male',d:'40',f:'40'});
+CALL com.maxdemarzi.traverse.decision_tree('zhangxianzeng1', {b:'66',e:'40',f:'40'});
+CALL com.maxdemarzi.traverse.decision_tree('zhangxianzeng1', {gender:'female',a:'male',b:'66',c:'40',d:'40',e:'40',f:'40'});
+
+CREATE (start:Start { id: 'zhangxianzeng' })
+CREATE (gender1:Rule{gender:"女"})
+CREATE (gender2:Rule{gender:"男"})
+CREATE (age1:Age{age2:'age>=55'})
+CREATE (resule:End{name:"男年龄大于55"})
+CREATE (resule1:End{name:"女年龄大于55"})
+create(start)-[:TURE{id:1}]->(gender1)
+create(start)-[:TURE{id:2}]->(gender2)
+create(gender1)-[:TURE{id:1}]->(age1)
+create(gender2)-[:TURE{id:2}]->(age1)
+create(age1)-[:TURE{id:2}]->(resule)
+create(age1)-[:TURE{id:1}]->(resule1)
+
+CALL com.maxdemarzi.schema.generate
+
+
+
+
+
+
+
+
+CREATE (start:Start { id: 'zhangxianzeng' })
+CREATE (gender1:Rule{gender:"女"})
+CREATE (gender2:Rule{gender:"男"})
+CREATE (age1:Age{age2:55})
+CREATE (resule:End{name:"男年龄大于55"})
+CREATE (resule1:End{name:"女年龄大于55"})
+create(start)-[:TURE{id:1}]->(gender1)
+create(start)-[:TURE{id:2}]->(gender2)
+create(gender1)-[:TURE{id:1}]->(age1)
+create(gender2)-[:TURE{id:2}]->(age1)
+create(age1)-[:TURE{id:2}]->(resule)
+create(age1)-[:TURE{id:1}]->(resule1)
+
+
+
+
+
+CALL com.maxdemarzi.stepwise.decision_tree('zhangxianzeng', {});
+CALL com.maxdemarzi.stepwise.decision_tree('zhangxianzeng', {age:'20'});
+CALL com.maxdemarzi.stepwise.decision_tree('zhangxianzeng', {age:'24'}); 
+CALL com.maxdemarzi.stepwise.decision_tree('zhangxianzeng', {gender:'male', age:'20'});
+CALL com.maxdemarzi.stepwise.decision_tree('zhangxianzeng', {gender:'female', age:'19'});
+CALL com.maxdemarzi.stepwise.decision_tree('zhangxianzeng', {gender:'male', age:'99'});     
+CALL com.maxdemarzi.traverse.decision_tree('zhangxianzeng', {gender:'male', age:'99'});
+CALL com.maxdemarzi.traverse.decision_tree('zhangxianzeng', {gender:'male', age:'99',a:'40',c:'40'});
+CALL com.maxdemarzi.stepwise.decision_tree('zhangxianzeng', {gender:'male', age:'99',a:'40',c:'40'});
+
+
+
+
+
+
+
+
+
+
+  if (isTrue(path.endNode())) {
+                	 List<Relationship> rels = new ArrayList<>();
+                     for (Relationship r : path.endNode().getRelationships(Direction.OUTGOING, RelationshipTypes.IS_TRUE)) {
+                         Object id = r.getProperty("id1");
+                         
+                         if (id.hashCode()==id.hashCode()) {
+                             rels.add(r);
+                            
+                         }
+                         return rels;
+                    

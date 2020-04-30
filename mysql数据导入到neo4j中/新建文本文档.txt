@@ -1,0 +1,5 @@
+mysql连接neo4j的方法如下首先下载apoc的jar文件和mysql连接器文件将两个文件放入到plugins文件夹中，之后启动neo4j
+
+在浏览器中首先要输入call apoc.load.driver('com.mysql.jdbc.Driver')用来注明mysql驱动程序
+然后输入CALL apoc.load.jdbc('jdbc:mysql://localhost:3306/test?user=root&password=root&useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC','select * from tb_wp') YIELD row
+CREATE (n:User {id: row.id, name: row.name, age: row.age,bri: row.bri,tel: row.tel})用来将mysql中的数据导入到neo4j中,一个表一个表的导入

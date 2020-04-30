@@ -1,0 +1,33 @@
+将csv文件放入到import文件夹下，主要注意的是关系csv文件中的头文件必须要有:START_ID :END_ID的标准https://blog.csdn.net/sinat_26917383/article/details/82424508
+
+然后cd到[root@localhost neo4j-community-3.5.5]# 
+输入 ./bin/neo4j-admin import --nodes import/movies.csv --nodes import/actors.csv --relationships import/roles.csv
+
+
+
+
+几个例子中的:LABEL表示显示时的节点标签，关系csv中的:TYPE表示关系这些不能缺少否则不显示
+
+
+
+
+import --nodes import/diqiceng.csv --nodes import/diliuceng.csv --relationships import/qiliurole.csv --nodes import/diwuceng.csv --relationships import/liuwurole.csv  --nodes import/disiceng.csv --relationships import/wusirole.csv  --nodes import/disanceng.csv --relationships import/sisanrole.csv  --nodes import/dierceng.csv --relationships import/sanerrole.csv  --nodes import/diyiceng.csv --relationships import/eryirole.csv 
+
+
+
+
+
+
+
+
+列名用于节点和关系的属性名称，特定列有一些额外的标记
+
+name:ID - 全局id列，通过该列查找节点以便以后重新连接，
+如果保留属性名称，它将不会被存储（临时），这就是–id-type所指的
+如果你有跨实体的重复id，你必须在括号中提供实体（id-group） :ID(Order)
+如果您的ID是全球唯一的，您可以将其关闭
+:LABEL - 节点的标签列，多个标签可以用分隔符分隔
+:START_ID，:END_ID- 关系文件列，引用节点ID，用于id-groups使用:END_ID(Order)
+:TYPE - 关系型列
+所有其他列都被视为属性，但如果为空或在注释时跳过：IGNORE
+类型转换可以通过后面添加的名称，例如通过:INT，:BOOLEAN等
